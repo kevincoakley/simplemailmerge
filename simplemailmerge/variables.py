@@ -30,4 +30,16 @@ class Variables:
             if "email" not in csv_list[0]:
                 raise ValueError("CSV header does not contain \"email\" column")
 
-            return csv_list
+            csv_list_of_dict = []
+
+            for row in csv_list:
+                # Skip the csv header
+                if row != csv_list[0]:
+                    dict_row = dict()
+
+                    for column_index, value in enumerate(row):
+                        dict_row.update({csv_list[0][column_index]: value})
+
+                    csv_list_of_dict.append(dict_row)
+
+            return csv_list_of_dict

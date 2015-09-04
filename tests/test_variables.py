@@ -13,10 +13,16 @@ class VariablesTestCase(unittest.TestCase):
         self.missing_csv_file = "tests/csv/missing_csv_file.csv"
         self.only_header_csv_file = "tests/csv/only_header_csv_file.csv"
         self.valid_csv_file = "tests/csv/valid_csv_file.csv"
-        self.valid_csv_file_values = [['email', 'first_name', 'link'],
-                                      ['kcoakley@sdsc.edu', 'Kevin', 'http://www.google.com'],
-                                      ['kcoakley@ucsd.edu', 'Nivek', 'http://www.github.com'],
-                                      ['kcoakley@eng.ucsd.edu', 'KEVIN', 'http://www.python.org']]
+
+        self.valid_csv_file_values = [{"email": "kcoakley@sdsc.edu",
+                                       "first_name": "Kevin",
+                                       "link": "http://www.google.com"},
+                                      {"email": "kcoakley@ucsd.edu",
+                                       "first_name": "Nivek",
+                                       "link": "http://www.github.com"},
+                                      {"email": "kcoakley@eng.ucsd.edu",
+                                       "first_name": "KEVIN",
+                                       "link": "http://www.python.org"}]
 
     # User specifies csv file that exists
     def test_csv_file_exists(self):
