@@ -1,5 +1,5 @@
 {
-  "from": "kcoakley@sdsc.edu",
-  "subject": "I have a link for you!",
+  "from": "kcoakley@sdsc.edu"
+  "subject": "I have a link for you!"
   "body": "Hi %%FIRST_NAME%%\n\nI have a link to share with you: %%LINK%%\n\nKevin"
 }
