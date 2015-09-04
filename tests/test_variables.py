@@ -60,9 +60,3 @@ class VariablesTestCase(unittest.TestCase):
     # Verify Variables.list returns the expected values
     def test_for_list_output(self):
         self.assertListEqual(Variables(self.valid_csv_file).list, self.valid_csv_file_values)
-
-# User specifies a valid json template file
-
-# The json file has variables: from, subject, body
-
-# The values from the csv file are successfully merged with the json template
