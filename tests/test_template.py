@@ -19,34 +19,52 @@ class TemplateTestCase(unittest.TestCase):
 
     # User specifies json file that exists
     def test_json_file_exists(self):
-        self.assertRaises(IOError, Template, self.missing_json_file)
+        with self.assertRaises(IOError):
+            missing_template = Template(self.missing_json_file)
+            missing_template.read()
 
         try:
-            self.assertIsInstance(Template(self.valid_json_file), Template)
+            valid_template = Template(self.valid_json_file)
+            valid_template.read()
         except IOError:
-            self.fail("valid_csv_file not found: %s" % self.valid_json_file)
+            self.fail("valid_json_file not found: %s" % self.valid_json_file)
 
     # User specifies a valid json file
     def test_valid_json_format(self):
-        self.assertRaises(ValueError, Template, self.blank_json_file)
-        self.assertRaises(ValueError, Template, self.invalid_json_file)
-        self.assertIsInstance(Template(self.valid_json_file), Template)
+        with self.assertRaises(ValueError):
+            blank_template = Template(self.blank_json_file)
+            blank_template.read()
+
+        with self.assertRaises(ValueError):
+            invalid_template = Template(self.invalid_json_file)
+            invalid_template.read()
+
+        try:
+            valid_template = Template(self.valid_json_file)
+            valid_template.read()
+        except ValueError:
+            self.fail("valid_json_file not valid JSON")
 
     # The json file has properties: from, subject, body
     def test_json_file_has_correct_properties(self):
-        self.assertRaises(KeyError, Template, self.bad_property_json_file)
-        self.assertRaises(ValueError, Template, self.missing_property_json_file)
+        with self.assertRaises(KeyError):
+            bad_property_template = Template(self.bad_property_json_file)
+            bad_property_template.read()
 
-        template = Template(self.valid_json_file)
+        with self.assertRaises(ValueError):
+            missing_property_template = Template(self.missing_property_json_file)
+            missing_property_template.read()
 
-        self.assertListEqual(template.__dict__.keys(), self.json_template_properties)
+        valid_template = Template(self.valid_json_file)
+        valid_template.read()
 
         for json_template_property in self.json_template_properties:
-            self.assertIsNotNone(template.__dict__[json_template_property])
+            self.assertIsNotNone(valid_template.__dict__[json_template_property])
 
     # Verify the Template object has the correct values for the properties
     def test_for_correct_values(self):
-        template = Template(self.valid_json_file)
+        valid_template = Template(self.valid_json_file)
+        valid_template.read()
 
         for key, value in self.json_values.iteritems():
-            self.assertEqual(template.__dict__[key], value)
+            self.assertEqual(valid_template.__dict__[key], value)
