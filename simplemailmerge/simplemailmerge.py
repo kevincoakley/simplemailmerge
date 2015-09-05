@@ -7,8 +7,8 @@ from template import Template
 class SimpleMailMerge:
 
     def __init__(self, csv_file, json_file):
-        self.template = Template(json_file)
-        self.variables = Variables(csv_file).list
+        self.csv_file = csv_file
+        self.json_file = json_file
 
     @staticmethod
     def merge(variables, body):
