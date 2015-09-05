@@ -26,43 +26,80 @@ class VariablesTestCase(unittest.TestCase):
 
     # User specifies csv file that exists
     def test_csv_file_exists(self):
-        self.assertRaises(IOError, Variables, self.missing_csv_file)
+        with self.assertRaises(IOError):
+            missing_variables = Variables(self.missing_csv_file)
+            missing_variables.read()
 
         try:
-            self.assertIsInstance(Variables(self.valid_csv_file), Variables)
+            valid_variables = Variables(self.valid_csv_file)
+            valid_variables.read()
         except IOError:
             self.fail("valid_csv_file not found: %s" % self.valid_csv_file)
 
     # User specifies a valid csv file
     def test_valid_csv_format(self):
-        self.assertRaises(csv.Error, Variables, self.blank_csv_file)
-        self.assertRaises(csv.Error, Variables, self.invalid_csv_file)
-        self.assertIsInstance(Variables(self.valid_csv_file), Variables)
+        with self.assertRaises(csv.Error):
+            blank_variables = Variables(self.blank_csv_file)
+            blank_variables.read()
+
+        with self.assertRaises(csv.Error):
+            invalid_variables = Variables(self.invalid_csv_file)
+            invalid_variables.read()
+
+        try:
+            valid_variables = Variables(self.valid_csv_file)
+            valid_variables.read()
+        except csv.Error:
+            self.fail("valid_csv_file is invalid format")
 
     # The csv file has a header row
     def test_for_csv_header(self):
-        self.assertRaisesRegexp(ValueError,
-                                "CSV header not found",
-                                Variables,
-                                self.no_header_csv_file)
-        self.assertIsInstance(Variables(self.valid_csv_file), Variables)
+        with self.assertRaisesRegexp(ValueError, "CSV header not found"):
+            no_header_variables = Variables(self.no_header_csv_file)
+            no_header_variables.read()
+
+        try:
+            valid_variables = Variables(self.valid_csv_file)
+            valid_variables.read()
+        except ValueError as e:
+            if e.message == "CSV header not found":
+                self.fail("valid_csv_file does not have a header")
+            else:
+                self.fail("Unknown Value error")
 
     # The csv file has at least one variable row
     def test_for_multiple_rows(self):
-        self.assertRaisesRegexp(ValueError,
-                                "CSV only contains the header",
-                                Variables,
-                                self.only_header_csv_file)
-        self.assertIsInstance(Variables(self.valid_csv_file), Variables)
+        with self.assertRaisesRegexp(ValueError, "CSV only contains the header"):
+            only_header_variables = Variables(self.only_header_csv_file)
+            only_header_variables.read()
+
+        try:
+            valid_variables = Variables(self.valid_csv_file)
+            valid_variables.read()
+        except ValueError as e:
+            if e.message == "CSV only contains the header":
+                self.fail("valid_csv_file only contains the header")
+            else:
+                self.fail("Unknown Value error")
 
     # The csv file has at least one header column name email
     def test_for_email_column_in_header(self):
-        self.assertRaisesRegexp(ValueError,
-                                "CSV header does not contain \"email\" column",
-                                Variables,
-                                self.no_email_header_csv_file)
-        self.assertIsInstance(Variables(self.valid_csv_file), Variables)
+        with self.assertRaisesRegexp(ValueError, "CSV header does not contain \"email\" column"):
+            no_email_header_variables = Variables(self.no_email_header_csv_file)
+            no_email_header_variables.read()
+
+        try:
+            valid_variables = Variables(self.valid_csv_file)
+            valid_variables.read()
+        except ValueError as e:
+            if e.message == "CSV header does not contain \"email\" column":
+                self.fail("valid_csv_file header does not contain email")
+            else:
+                self.fail("Unknown Value error")
 
     # Verify Variables.list returns the expected values
     def test_for_list_output(self):
-        self.assertListEqual(Variables(self.valid_csv_file).list, self.valid_csv_file_values)
+        valid_variables = Variables(self.valid_csv_file)
+        valid_variables.read()
+
+        self.assertListEqual(valid_variables.list, self.valid_csv_file_values)

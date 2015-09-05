@@ -6,12 +6,12 @@ import csv
 class Variables:
 
     def __init__(self, csv_file):
-        self.list = Variables.read(csv_file)
+        self.csv_file = csv_file
+        self.list = None
 
-    @staticmethod
-    def read(csv_file):
+    def read(self):
 
-        with open(csv_file, 'r') as f:
+        with open(self.csv_file, 'r') as f:
 
             dialect = csv.Sniffer().sniff(f.read())
             f.seek(0)
@@ -42,4 +42,4 @@ class Variables:
 
                     csv_list_of_dict.append(dict_row)
 
-            return csv_list_of_dict
+            self.list = csv_list_of_dict
