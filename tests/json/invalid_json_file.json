@@ -1,5 +1,9 @@
 {
-  "from_addresss": "kcoakley@sdsc.edu"
+  "smtp_server": "smtp.gmail.com"
+  "smtp_port": "587"
+  "smtp_username": "username"
+  "smtp_password": "password"
+  "from_address": "kcoakley@sdsc.edu"
   "subject": "I have a link for you!"
   "body": "Hi %%FIRST_NAME%%\n\nI have a link to share with you: %%LINK%%\n\nKevin"
 }
