@@ -7,7 +7,7 @@ class Variables:
 
     def __init__(self, csv_file):
         self.csv_file = csv_file
-        self.list = None
+        self.list = []
 
     def read(self):
 
