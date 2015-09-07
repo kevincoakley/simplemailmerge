@@ -18,13 +18,13 @@ def readme():
 
 
 setup(name="simplemailmerge",
-      version="0.0.1",
+      version="1.0.0",
       description="Simple mail merge using CSV and JSON",
       long_description=readme(),
       author="Kevin Coakley",
       author_email="kcoakley@sdsc.edu",
       scripts=[
-          "bin/simplemailmerge.py",
+          "bin/simplemailmerge",
       ],
       url="",
       packages=[
