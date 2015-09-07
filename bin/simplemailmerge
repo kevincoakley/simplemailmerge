@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+
+import argparse
+from simplemailmerge.simplemailmerge import SimpleMailMerge
+
+if __name__ == "__main__":
+    # parse parameters
+    parser = argparse.ArgumentParser(description="Simple mail merge using CSV and JSON",
+                                     epilog="Example: ./simplemailmerge -v vars.csv -t temp.json")
+
+    parser.add_argument("-v",
+                        metavar="variables_csv",
+                        dest="variables_csv",
+                        help="Variables CSV file",
+                        required=True)
+
+    parser.add_argument("-t",
+                        metavar="template_json",
+                        dest="template_json",
+                        help="Template JSON file",
+                        required=True)
+
+    args = vars(parser.parse_args())
+
+    simplemailmerge = SimpleMailMerge(args["variables_csv"], args["template_json"])
+    simplemailmerge.email()
