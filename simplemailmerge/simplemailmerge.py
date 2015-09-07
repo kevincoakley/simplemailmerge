@@ -47,7 +47,7 @@ class SimpleMailMerge:
                                            template.smtp_username,
                                            template.smtp_password)
             except smtplib.SMTPAuthenticationError, e:
-                raise SystemExit(e.message)
+                raise SystemExit("Invalid SMTP Username or Password")
 
     @staticmethod
     def merge(variables, body):
