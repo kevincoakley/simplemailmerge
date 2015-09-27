@@ -6,6 +6,6 @@ install:
   - pip install -q -r requirements.txt
   - pip install -q -r test-requirements.txt
 
-before_script: "pep8 --ignore=E501,E402 --show-source --count ."
+before_script: "flake8 --ignore=E402 --max-line-length=100 --show-source --count ."
 
 script: "python setup.py test"
