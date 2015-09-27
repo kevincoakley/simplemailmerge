@@ -2,7 +2,8 @@
 simplemailmerge
 ###############
 
-[![Build Status](https://travis-ci.org/kevincoakley/simplemailmerge.svg?branch=master)](https://travis-ci.org/kevincoakley/simplemailmerge)
+.. image:: https://travis-ci.org/kevincoakley/simplemailmerge.svg?branch=master
+    :target: https://travis-ci.org/kevincoakley/simplemailmerge
 
 ************
 Installation
