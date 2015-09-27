@@ -1,6 +1,5 @@
 import vars
 import unittest
-import smtplib
 from simplemailmerge.simplemailmerge import SimpleMailMerge
 
 

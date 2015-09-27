@@ -2,6 +2,8 @@
 simplemailmerge
 ###############
 
+[![Build Status](https://travis-ci.org/kevincoakley/simplemailmerge.svg?branch=master)](https://travis-ci.org/kevincoakley/simplemailmerge)
+
 ************
 Installation
 ************
@@ -17,7 +19,7 @@ Install from source:
 ::
 
     $ git clone https://github.com/kevincoakley/simplemailmerge.git
-    $ cd UCSD_BigData_Scripts
+    $ cd simplemailmerge
     $ python setup.py install
 
 *******

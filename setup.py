@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 try:
-    from setuptools import setup, find_packages
+    from setuptools import setup
     extra = dict(install_requires=[
     ],
         include_package_data=True,
